@@ -30,5 +30,5 @@ Tämä yksinkertainen HTML-sivu laskee paisuntasäiliön lopullisen paineen sulj
 - Laskenta on yksinkertaistettu. Oletukset:
   - Paisuntasäiliö sisältää esipaineistetun kaasun (esim. typen tai ilman), joka käyttäytyy ideaalikaan mukaisesti.
   - Veden ominaisuudet noudattavat valittua approksimaatiota lämpötilan ja tiheyden suhteen.
-  - Paisuntasäiliön tilavuus ei muutu lämpötilan tai paineen takia.
+  - Paisuntasäiliön ja muun suljetun järjestelmän tilavuus ei muutu lämpötilan tai paineen takia.
 
