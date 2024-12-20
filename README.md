@@ -20,7 +20,7 @@ Tämä yksinkertainen HTML-sivu laskee paisuntasäiliön lopullisen paineen sulj
 
 ## Käyttö
 
-1. Avaa `index.html` (tai vastaava tiedosto) suoraan selaimessa.
+1. Tallenna `water-calc.html` ja avaa suoraan selaimessa.
 2. Syötä haluamasi arvot tai käytä oletusarvoja.
 3. Paina **"Laske"**-painiketta.
 4. Tulos näytetään sivulla.
