@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/> 
+    <title>Paisuntasäiliön Paineen Laskenta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2em;
+        }
+        label, input, select {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        input[type="number"] {
+            width: 150px;
+        }
+        .result {
+            margin-top: 1em;
+            padding: 1em;
+            border: 1px solid #ccc;
+            background: #f9f9f9;
+        }
+        .images {
+            margin-top: 2em;
+        }
+        .images img {
+            max-width: 200px;
+            display: inline-block;
+            margin-right: 1em;
+        }
+        img {
+            float: right;
+            margin-left: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Paisuntasäiliön paineen laskenta</h1>
+    <p>Syötä arvot alla oleviin kenttiin ja paina "Laske" -painiketta.</p>
+
+     <img src="data:image/png;base64,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" alt="System"/>
+
+    <form id="calcForm">
+        <label for="V_water_initial">Veden alkutilavuus (l)</label>
+        <input type="number" id="V_water_initial" name="V_water_initial" value="1000" step="any">
+
+        <label for="T_initial">Veden alkulämpötila (°C)</label>
+        <input type="number" id="T_initial" name="T_initial" value="20" step="any">
+
+        <label for="T_final">Veden loppulämpötila (°C)</label>
+        <input type="number" id="T_final" name="T_final" value="90" step="any">
+
+        <label for="V_tank">Paisuntasäiliön koko (l)</label>
+        <input type="number" id="V_tank" name="V_tank" value="100" step="any">
+
+        <label for="P_initial">Paisuntasäiliön esipaine (bar)</label>
+        <input type="number" id="P_initial" name="P_initial" value="0.5" step="any">
+
+        <label for="include_gas_heating">Huomioidaanko paisuntäsäiliön kaasun lämpeneminen?</label>
+        <select id="include_gas_heating" name="include_gas_heating">
+            <option value="k" selected>Kyllä</option>
+            <option value="e">Ei</option>
+        </select>
+
+        <button type="button" onclick="calculatePressure()">Laske</button>
+    </form>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function waterDensity(T) {
+            // rho (kg/m³) lämpötilassa T (°C)
+            var numerator = 999.83952 + 16.945176*T - 7.9870401e-3*Math.pow(T,2) - 46.170461e-6*Math.pow(T,3) 
+                            + 105.56302e-9*Math.pow(T,4) - 280.54253e-12*Math.pow(T,5);
+            var denominator = 1 + 16.87985e-3*T;
+            return numerator / denominator;
+        }
+
+        function calculatePressure() {
+            var V_water_initial = parseFloat(document.getElementById("V_water_initial").value);
+            var T_initial = parseFloat(document.getElementById("T_initial").value);
+            var T_final = parseFloat(document.getElementById("T_final").value);
+            var V_tank = parseFloat(document.getElementById("V_tank").value);
+            var P_initial = parseFloat(document.getElementById("P_initial").value);
+            var include_gas_heating = document.getElementById("include_gas_heating").value === 'k';
+
+            // Muutetaan litrat -> m³
+            var V_water_initial_m3 = V_water_initial / 1000.0;
+            var V_tank_m3 = V_tank / 1000.0;
+
+            var rho_initial = waterDensity(T_initial);
+            var rho_final = waterDensity(T_final);
+
+            // Veden massa
+            var m_water = rho_initial * V_water_initial_m3;
+
+            // Lopullinen veden tilavuus
+            var V_water_final_m3 = m_water / rho_final;
+
+            // Tilavuuden muutos
+            var delta_V_m3 = V_water_final_m3 - V_water_initial_m3;
+
+            // Kaasun tilavuudet
+            var V_gas_initial_m3 = V_tank_m3;
+            var V_gas_final_m3 = V_gas_initial_m3 - delta_V_m3;
+
+            if (V_gas_final_m3 <= 0) {
+                document.getElementById("result").innerHTML = "Virhe: Paisuntasäiliö on liian pieni käsittelemään veden lämpölaajenemista.";
+                return;
+            }
+
+            // Boylen laki: P1*V1 = P2*V2
+            // bar -> Pa
+            var P_initial_Pa = P_initial * 1e5;
+            var P_final_Pa = P_initial_Pa * (V_gas_initial_m3 / V_gas_final_m3);
+
+            // Jos kaasu lämpenee
+            if (include_gas_heating) {
+                var T_initial_K = T_initial + 273.15;
+                var T_final_K = T_final + 273.15;
+                P_final_Pa *= (T_final_K / T_initial_K);
+            }
+
+            var P_final = P_final_Pa / 1e5; // Pa -> bar
+
+            // Energia-arvio
+            var ominaislampo = 4186; // J/(kg·°C)
+            var delta_T = T_final - T_initial;
+            var energia = V_water_initial * ominaislampo * delta_T; // Joulea
+            var energia_kWh = energia / 3600000.0;
+
+            var delta_V_l = (V_water_final_m3 - V_water_initial_m3)*1000; // litraa
+            var tulos = "<h3>Tulokset</h3>" +
+                        "<p>Vesi laajenee noin " + delta_V_l.toFixed(2) + " litraa.</p>" +
+                        "<p>Lopullinen paine: " + P_final.toFixed(2) + " bar.</p>" +
+                        "<p>Veteen varastoitunut energia: " + energia_kWh.toFixed(1) + " kWh.</p>";
+
+            document.getElementById("result").innerHTML = tulos;
+        }
+    </script>
+</body>
+</html>
